@@ -1,0 +1,6 @@
+{
+    "terminal.integrated.env.osx": {
+        "PATH": "/Users/takahito/.platformio/penv/bin:/Users/takahito/.platformio/penv:/usr/local/opt/qt/bin:/Users/takahito/.pyenv/shims:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "PLATFORMIO_CALLER": "vscode"
+    }
+}
