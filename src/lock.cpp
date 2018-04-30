@@ -44,10 +44,9 @@ LOCK_STATUS getLockStatus(){
 void lockTick(){
     if(lockServoReleaseTimeout > 0) {
         lockServoReleaseTimeout--;
-        Serial.printf("LT %d\n", lockServoReleaseTimeout);
     }
     if(lockServoReleaseTimeout == 0){
         servoRelease();
         lockServoReleaseTimeout = -1;
     }
-}¥
+}
