@@ -6,3 +6,4 @@
 .DS_Store
 .vscode/
 .vscode/*.db
+.vscode/.browse.c_cpp.db*

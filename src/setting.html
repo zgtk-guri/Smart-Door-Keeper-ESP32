@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Smart Door Keyper 設定</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0/materia/bootstrap.min.css" rel="stylesheet" integrity="sha384-kpxyUW5uLgBOlhLqm8Hga/aWgf7FgZWLhphVqsMgaW0s+G6KF1RZpUb6ygQL3WUE" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="page-header">
+                    <h1 style="padding: 20px 10px;">Smart Door Keyper 初期設定</h1>
+                </div>
+            </div>
+            <form action="/setting/set" method="POST">
+                <div class="form-group"><label for="wifissid">Wi-Fi SSID</label><input type="text" name="wifissid" id="wifissid" class="form-control" placeholder="Wi-Fi SSID"></div>
+                <div class="form-group"><label for="wifipasswd">Wi-Fi Passphrase</label><input type="password" name="wifipasswd" id="wifipasswd" class="form-control" placeholder="Wi-Fi Passphrase"></div>
+                <hr>
+                <div class="form-group"><label for="mainpasswd">Setting Password</label><input type="password" name="settingpasswd" id="settingpasswd" class="form-control" placeholder="Setting Password"></div>
+                <div class="row"><input class="btn btn-primary" type="submit" value="送信"></div>
+            </form>
+            <div class="row">
+                <div class="page-header">
+                    <h2 style="padding: 15px 10px;">BLE用認証コード</h2>
+                </div>
+            </div>
+            <div class="row">
+                <p id="ble_key">please wait...</p>
+            </div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>        
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>    </head>
+        <script>
+            $(function(){
+                $.ajax({url:'/setting/key', method:'GET'})
+                    .done((data)=>{
+                        $('#ble_key').text(data);
+                    });
+            });
+        </script>
+    </body>
+</html>

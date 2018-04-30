@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Smart Door Keyper</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0/materia/bootstrap.min.css" rel="stylesheet" integrity="sha384-kpxyUW5uLgBOlhLqm8Hga/aWgf7FgZWLhphVqsMgaW0s+G6KF1RZpUb6ygQL3WUE" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="page-header">
+                    <h1 style="padding: 20px 10px;">Smart Door Keyper</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-9">
+                    <p>現在の状態: <span id="status_label">取得中</span></p>
+                </div>
+                <div class="col-1">
+                    <button class="btn" id="reload_button">更新</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="page-header">
+                    <h2>操作</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <button class="btn btn-block btn-success" id="open_button">解錠</button>
+                </div>
+                <div class="col">
+                    <button class="btn btn-block btn-danger" id="close_button">施錠</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="page-header">
+                    <a href="/setting" style="padding: 0 10px;"><h3>設定ページへ</h3></a>
+                </div>
+            </div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script>
+            function reload(){
+                $.ajax({url:'/status', method:'GET'})
+                    .done((data)=>{
+                        $("#status_label").text(data);
+                    });
+            }
+            $(()=>{
+                reload();
+                $("#reload_button").click(()=>{
+                    reload();
+                });
+                $("#open_button").click(()=>{
+                    $.ajax({url:'/open', method:'GET'})
+                        .done((data)=>{
+                            relaod();
+                        });
+                });
+                $("#close_button").click(()=>{
+                    $.ajax({url:'/close', method:'GET'})
+                        .done((data)=>{
+                            relaod();
+                        });
+                })
+            });
+        </script>
+    </body>
+</html>
