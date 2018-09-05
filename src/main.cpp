@@ -219,8 +219,18 @@ void setup() {
             }
             blePin = base64::encode((uint8_t *)raw, 15);
             pref.putString(PREF_BLE_PIN, blePin);
+            setBlePin(blePin);
         }
         webServer.send(200, "text/plain", blePin);
+    });
+    webServer.on("/ip_addr", [](){
+        if(!webServer.authenticate(WWW_USERNAME, settingPassword.c_str())){
+            return webServer.requestAuthentication();
+        }
+        auto ip = WiFi.localIP();
+        char ip_str[20];
+        sprintf(ip_str, "%d.%d.%d.%d", ip[0], ip[1], ip[2], ip[3]);
+        webServer.send(200, "text/plain", String(ip_str));
     });
 
     // nfc initialize
@@ -535,6 +545,10 @@ void tickOnAddCard(){
         lcd.setCursor(0,1);
         lcd.print("  cancel");
         page = 2;
+    }
+
+    if(isSw1Clicked() || isSw2Clicked()){
+        state = LOCKED_STAND_BY;
     }
 
     if(isCardChanged() && getCardTouching()){

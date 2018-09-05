@@ -19,7 +19,7 @@ bool getSw2IsPushed(){ return switches_stat[1]; };
 bool getDipSw1IsOn(){ return switches_stat[2]; };
 bool getDipSw2IsOn(){ return switches_stat[3]; };
 bool getDoorIsClosed(){ return switches_stat[4]; };
-bool getThumbTurnIsLocked(){ return switches_stat[5]; };
+bool getThumbTurnIsLocked(){ return !switches_stat[5]; };
 
 void switchPollingTask(void *pvParameters){
     const uint8_t ports[6] = {PORT_SW1, PORT_SW2, PORT_DIPSW1, PORT_DIPSW2, PORT_DOOR_SW, PORT_LOCK_DET};

@@ -42,6 +42,7 @@ const char* index_html = "<!DOCTYPE html>\n\
                 <div class=\"page-header\">\n\
                     <a href=\"/setting\" style=\"padding: 0 10px;\"><h3>設定ページへ</h3></a>\n\
                 </div>\n\
+                <p>IPアドレス: <span id=\"ip_label\">取得中</span></p>\n\
             </div>\n\
         </div>\n\
         <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js\"></script>\n\
@@ -55,6 +56,10 @@ const char* index_html = "<!DOCTYPE html>\n\
             }\n\
             $(()=>{\n\
                 reload();\n\
+                $.ajax({url:'/ip_addr', method:'GET'})\n\
+                    .done((data)=>{\n\
+                        $(\"#ip_label\").text(data);\n\
+                    });\n\
                 $(\"#reload_button\").click(()=>{\n\
                     reload();\n\
                 });\n\
